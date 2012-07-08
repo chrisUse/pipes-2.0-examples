@@ -18,9 +18,12 @@ check = forever $ do
      lift $ putStrLn $ "Can '" ++ (show x) ++ "' pass?"
      ok <- read <$> lift getLine
      when ok (yield x)
-
 --
 testRunPipe :: IO ()
 testRunPipe = runPipe $ forever await <+< check <+< mapM_ yield [1..]
 --
+-- *Main> testRunPipe 
+-- Can '1' pass?
+-- True
+-- Can '2' pass?
 --
